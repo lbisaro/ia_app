@@ -43,7 +43,7 @@ except Exception as e:
     model = None
 
 
-@app.route('/analizar', methods=['POST'])
+@app.route('/ia_prompt', methods=['POST'])
 def analizar_texto():
     if not model:
         return jsonify({"error": "Modelo Gemini no inicializado correctamente."}), 500
