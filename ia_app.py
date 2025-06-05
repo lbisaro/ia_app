@@ -1,4 +1,3 @@
-import os
 import google.generativeai as genai
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
@@ -7,7 +6,7 @@ from local__config import GENAI_APK as GEMINI_API_KEY
 # Cargar variables de entorno desde .env
 load_dotenv()
 
-app = Flask(__name__)
+ia_app = Flask(__name__)
 
 genai.configure(api_key=GEMINI_API_KEY)
 
@@ -43,8 +42,8 @@ except Exception as e:
     model = None
 
 
-@app.route('/ia_prompt/', methods=['POST'])
-def ia_prompt():
+@ia_app.route('/ia_app/', methods=['POST'])
+def ia_app():
     if not model:
         return jsonify({"error": "Modelo Gemini no inicializado correctamente."}), 500
 
@@ -96,9 +95,9 @@ def ia_prompt():
 
     except Exception as e:
         # Loguea el error para depuración
-        app.logger.error(f"Error durante el análisis: {e}")
+        ia_app.logger.error(f"Error durante el análisis: {e}")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     # Solo para desarrollo local, no usar en producción
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    ia_app.run(debug=True, host='127.0.0.1', port=5000)
