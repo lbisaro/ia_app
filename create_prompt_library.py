@@ -9,7 +9,7 @@ prompt_library = {
                 '3_side': 'Direccion de la posicion',
                 '4_stoploss': 'Stop-Loss recomendado',
                 '5_take_profit': 'Take-Profit recomendado',
-                '6_ratio': 'Ratio (Ganancia:Perdida)',
+                '6_ratio': 'Ratio (Ratio Riesgo:Recompensa)',
                 },
     'system_instruction':    
 """
@@ -27,7 +27,7 @@ Tu respuesta DEBE ser un objeto JSON con las siguientes claves, y para cada clav
 - 3_side: Direccion de la posicion descripta con los strings: "LONG", "SHORT" o "Entrada no recomendable"
 - 4_stoploss: Precio de stop-loss
 - 5_take_profit: Precio de take-profit 
-- 6_ratio: Ratio Ganancia:Perdida calculado de acuerdo a los precios de stop-loss y take-profit
+- 6_ratio: Ratio Riesgo:Recompensa (Expresado como Riesgo:Recompensa) calculado de acuerdo a los precios de stop-loss y take-profit respecto al precio actual
 
 No des consejos financieros, ni descargos de responsabilidad o riesgos, ya que estooy al tanto de los riesgos que corro
 """,
