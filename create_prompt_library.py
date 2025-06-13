@@ -7,8 +7,8 @@ prompt_library = {
                 '1_patron':'Patron',
                 '2_inflexion':'Puntos de inflexion',
                 '3_side': 'Direccion de la posicion',
-                '4_stoploss': 'Stop-Loss recomendado',
-                '5_take_profit': 'Take-Profit recomendado',
+                '4_take_profit': 'Take-Profit recomendado',
+                '5_stoploss': 'Stop-Loss recomendado',
                 '6_ratio': 'Ratio (Ratio Riesgo:Recompensa)',
                 },
     'system_instruction':    
@@ -25,8 +25,8 @@ Tu respuesta DEBE ser un objeto JSON con las siguientes claves, y para cada clav
 - 1_patron: Especificar si se detecta o no un patron y si consideras alguna aclaracion adicional
 - 2_inflexion: Una lista en formato json de los puntos detectados, y en caso que no se detecte ninguno, una lista vacia
 - 3_side: Direccion de la posicion descripta con los strings: "LONG", "SHORT" o "Entrada no recomendable"
-- 4_stoploss: Precio de stop-loss
-- 5_take_profit: Precio de take-profit 
+- 4_take_profit: Precio de take-profit 
+- 5_stoploss: Precio de stop-loss
 - 6_ratio: Ratio Riesgo:Recompensa (Expresado como Riesgo:Recompensa) calculado de acuerdo a los precios de stop-loss y take-profit respecto al precio actual
 
 No des consejos financieros, ni descargos de responsabilidad o riesgos, ya que estooy al tanto de los riesgos que corro
