@@ -32,7 +32,6 @@ safety_settings = [
 with open('prompt_library.json', 'r', encoding='utf-8') as f:
     PROMPT_LIBRARY = json.load(f)
 
-
 try:
     models = {}
     for k in PROMPT_LIBRARY:
