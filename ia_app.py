@@ -77,6 +77,7 @@ def prompt():
     if not model:
         return jsonify({"error": "Modelo Gemini no inicializado correctamente."}), 500
     response = model.generate_content(prompt)
+    ia_response_json = {}
     
     if response.parts:
         ia_response = response.parts[0].text
@@ -89,6 +90,7 @@ def prompt():
             return jsonify({"error": "Formato de respuesta de Gemini no reconocido o vacío."}), 500
     
     ia_response_json = eval(ia_response)
+
     response_json = jsonify({
         "ia_response": ia_response_json,
         "instruction": instruction,
