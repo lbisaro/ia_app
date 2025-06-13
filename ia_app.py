@@ -29,29 +29,21 @@ safety_settings = [
     {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
 ]
 
+with open('prompt_library.json', 'r', encoding='utf-8') as f:
+    PROMPT_LIBRARY = json.load(f)
 
-PROMPT_LIBRARY = {
-'scalping_15m': """
-Eres un analista de trading experto de élite, especializado en scalping de criptomonedas.
-Tu única tarea es analizar los datos de un trade y un historial de velas que te proporcionaré.
-Basándote en esos datos, debes devolver ÚNICAMENTE un objeto JSON con las probabilidades 
-de que el precio alcance el Take-Profit y el Stop-Loss.
-El JSON debe tener las claves "take_profit_probability" y "stop_loss_probability" expresadas entre 0 y 100.
-No incluyas explicaciones, saludos, análisis adicionales, ni descargos de responsabilidad.
-""",
-}
 
 try:
     models = {}
     for k in PROMPT_LIBRARY:
-        system_instruction = PROMPT_LIBRARY[k]
-    models[k] = genai.GenerativeModel(
-        # 'gemini-1.0-pro', 'gemini-1.5-flash-latest', 'gemini-1.5-pro-latest' 
-        model_name="gemini-1.5-flash-latest", 
-        generation_config=generation_config,
-        safety_settings=safety_settings,
-        system_instruction=system_instruction
-    )
+        system_instruction = PROMPT_LIBRARY[k]['system_instruction']
+        models[k] = genai.GenerativeModel(
+            # 'gemini-1.0-pro', 'gemini-1.5-flash-latest', 'gemini-1.5-pro-latest' 
+            model_name="gemini-1.5-flash-latest", 
+            generation_config=generation_config,
+            safety_settings=safety_settings,
+            system_instruction=system_instruction
+        )
 
 except Exception as e:
     print(f"Error inicializando el modelo Gemini: {e}")
@@ -62,7 +54,7 @@ except Exception as e:
 
 @ia_app.route('/prompt/', methods=['POST'])
 def prompt():
-
+    
     #try:
     data = request.get_json()
     if not data:
@@ -71,10 +63,9 @@ def prompt():
         return jsonify({"error": "JSON Request must contain prompt value"}), 400
     elif 'instruction' not in data:
         return jsonify({"error": "JSON Request must contain instruction value"}), 400
-
     prompt = data.get('prompt')
     instruction = data.get('instruction')
-
+    
     if not prompt:
         return jsonify({"error": "El campo 'prompt' es requerido"}), 400
     if not instruction:
@@ -86,6 +77,7 @@ def prompt():
     if not model:
         return jsonify({"error": "Modelo Gemini no inicializado correctamente."}), 500
     response = model.generate_content(prompt)
+    
     if response.parts:
         ia_response = response.parts[0].text
     elif hasattr(response, 'text'):
@@ -97,18 +89,15 @@ def prompt():
             return jsonify({"error": "Formato de respuesta de Gemini no reconocido o vacío."}), 500
     
     ia_response_json = eval(ia_response)
-    response = jsonify({
+    response_json = jsonify({
         "ia_response": ia_response_json,
         "instruction": instruction,
         "prompt": prompt,
-        "instruction_text": PROMPT_LIBRARY[instruction],
+        "returns": PROMPT_LIBRARY[instruction]['returns'],
         "ok": 1,
     })
-    #for k in ia_response_json:
-    #    response['pepe'] = 'Pepe '+k
-    #"ia_response": ia_response_json
         
-    return response 
+    return response_json 
 
     #except Exception as e:
     #    ia_app.logger.error(f"Error durante el análisis: {e}")
