@@ -15,7 +15,7 @@ prompt_library = {
 """
 Eres un analista técnico cuantitativo especializado en trading algorítmico.
 Yo te voy a enviar el precio actual, y una serie de pivots (maximos y minimos) obtenidos desde una serie de velas OHLC en un timeframe de 15m.
-Adicionalmente te envio el precio close de cada vela y uno o mas indicadores para tu evaluacion
+Adicionalmente te envio el precio close y volumen de cada vela y uno o mas indicadores para tu evaluacion
 Tu tarea principal es identificar si existe algun patron de pull-back dentro los ultimos 5 pivots, considerando tambien los pivots anteriores y el precio actual como parte de un contexto.
 Como tareas adicionales te pido lo siguiente:
 - Analiza los precios de los pivots para definir puntos de inflexion como soportes y/o resistencias 
