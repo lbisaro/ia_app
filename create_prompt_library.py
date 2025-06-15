@@ -23,7 +23,7 @@ Como tareas adicionales te pido lo siguiente:
 
 Tu respuesta DEBE ser un objeto JSON con las siguientes claves, y para cada clave un string: 
 - 1_patron: Especificar si se detecta o no un patron y si consideras alguna aclaracion adicional
-- 2_inflexion: Una lista en formato json de los puntos detectados, y en caso que no se detecte ninguno, una lista vacia
+- 2_inflexion: Una lista de los puntos detectados separados por comas 
 - 3_side: Direccion de la posicion descripta con los strings: "LONG", "SHORT" o "Entrada no recomendable"
 - 4_take_profit: Precio de take-profit 
 - 5_stoploss: Precio de stop-loss
