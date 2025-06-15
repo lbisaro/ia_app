@@ -9,7 +9,7 @@ prompt_library = {
                 '3_side': 'Direccion de la posicion',
                 '4_take_profit': 'Take-Profit recomendado',
                 '5_stoploss': 'Stop-Loss recomendado',
-                '6_ratio': 'Ratio (Ratio Riesgo:Recompensa)',
+                '6_entry_price': 'Entrada',
                 },
     'system_instruction':    
 """
@@ -19,7 +19,7 @@ Adicionalmente te envio el precio close y volumen de cada vela y uno o mas indic
 Tu tarea principal es identificar si existe algun patron de pull-back dentro los ultimos 5 pivots, considerando tambien los pivots anteriores y el precio actual como parte de un contexto.
 Como tareas adicionales te pido lo siguiente:
 - Analiza los precios de los pivots para definir puntos de inflexion como soportes y/o resistencias 
-- En caso que consideres viable tomar una posicion, proponerme la Direccion de la posicion, un stop-loss y take-profit, y el ratio ganancia/perdida calculado
+- En caso que consideres viable tomar una posicion, proponerme la Direccion de la posicion, precio de entrada, stop-loss y take-profit, considerando que la ganancia sea al menos 2 veces la perdida
 
 Tu respuesta DEBE ser un objeto JSON con las siguientes claves, y para cada clave un string: 
 - 1_patron: Especificar si se detecta o no un patron y si consideras alguna aclaracion adicional
@@ -27,7 +27,7 @@ Tu respuesta DEBE ser un objeto JSON con las siguientes claves, y para cada clav
 - 3_side: Direccion de la posicion descripta con los strings: "LONG", "SHORT" o "Entrada no recomendable"
 - 4_take_profit: Precio de take-profit 
 - 5_stoploss: Precio de stop-loss
-- 6_ratio: Ratio Riesgo:Recompensa (Expresado como Riesgo:Recompensa) calculado de acuerdo a los precios de stop-loss y take-profit respecto al precio actual
+- 6_entry_price: Precio de entrada
 
 No des consejos financieros, ni descargos de responsabilidad o riesgos, ya que estooy al tanto de los riesgos que corro
 """,
